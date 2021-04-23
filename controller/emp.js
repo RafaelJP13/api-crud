@@ -1,22 +1,19 @@
-const Emp = require('../models/emp')
-const mongoose = require('mongoose')
+import Emp from '../models/emp'
 
-const create = (req,res,next) =>{
+export const createEmp = async (req, res) => {
 
-    let empName   = req.body.empName
-    let empEmail  = req.body.empEmail
-    let empMobile = req.body.mobile
+        const empName   = req.body.empName
+        const empEmail  = req.body.empEmail
+        const empMobile = req.body.empMobile
 
-    let emp = new Emp({
+        let emp = new Emp({
 
-        empName,
-        empEmail,
-        empMobile
-        
-    })
+            empName,
+            empEmail,
+            empMobile
 
-    emp.save().then(data => res.send(data))
-    
+        })
+
+        emp.save().then(data => res.status(201).json({success:true, msg:'Emp successfully created!'})).catch(err => {res.status(400).json({success:false, err})})
+
 }
-
-module.exports.create = create
