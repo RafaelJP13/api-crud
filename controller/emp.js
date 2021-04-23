@@ -15,5 +15,4 @@ export const createEmp = async (req, res) => {
         })
 
         emp.save().then(data => res.status(201).json({success:true, msg:'Emp successfully created!'})).catch(err => {res.status(400).json({success:false, err})})
-
 }
